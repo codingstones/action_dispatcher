@@ -6,12 +6,12 @@ require 'action_dispatcher/version'
 Gem::Specification.new do |spec|
   spec.name          = "action_dispatcher"
   spec.version       = ActionDispatcher::VERSION
-  spec.authors       = ["Nestor Salceda"]
-  spec.email         = ["nestor.salceda@gmail.com"]
+  spec.authors       = ["The Coding Stones"]
+  spec.email         = ["yeah@codingstones.com"]
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.summary       = %q{A command dispatcher implementation}
+  spec.description   = %q{An utility for our development stuff}
+  spec.homepage      = "https://github.com/codingstones/action_dispatcher"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
