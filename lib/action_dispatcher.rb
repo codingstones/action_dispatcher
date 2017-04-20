@@ -1,5 +1,2 @@
 require "action_dispatcher/version"
-
-module ActionDispatcher
-  # Your code goes here...
-end
+require "action_dispatcher/dispatcher"
