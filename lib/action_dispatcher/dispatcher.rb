@@ -8,7 +8,7 @@ module ActionDispatcher
       @actions[action_name] = action
     end
 
-    def execute(action_name, parameters)
+    def execute(action_name, parameters=nil)
       if @actions[action_name]
         @actions[action_name].execute(*parameters)
       else
