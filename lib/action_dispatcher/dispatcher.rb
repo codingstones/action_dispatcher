@@ -29,10 +29,4 @@ module ActionDispatcher
       parameters.length
     end
   end
-
-  class ActionNotFoundError < StandardError
-  end
-
-  class ArgumentError < StandardError
-  end
 end
