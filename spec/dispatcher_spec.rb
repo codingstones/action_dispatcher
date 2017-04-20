@@ -38,6 +38,17 @@ describe ActionDispatcher::Dispatcher do
         raise_error(ActionDispatcher::ActionNotFoundError)
     end
   end
+
+  context "when adding an action" do
+    context "and has been already added" do
+      it "raises an error" do
+        @dispatcher.add_action(action_name, AdderAction.new)
+
+        expect { @dispatcher.add_action(action_name, AdderAction.new) }.to \
+          raise_error(ActionDispatcher::ActionAlreadyExistsError)
+      end
+    end
+  end
 end
 
 class AdderAction

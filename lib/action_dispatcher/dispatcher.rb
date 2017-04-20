@@ -5,6 +5,7 @@ module ActionDispatcher
     end
 
     def add_action(action_name, action)
+      raise ActionAlreadyExistsError if @actions.include? action_name
       @actions[action_name] = action
     end
 

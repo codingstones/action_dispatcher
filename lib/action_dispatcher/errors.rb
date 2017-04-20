@@ -4,4 +4,7 @@ module ActionDispatcher
 
   class ArgumentError < StandardError
   end
+
+  class ActionAlreadyExistsError < StandardError
+  end
 end
