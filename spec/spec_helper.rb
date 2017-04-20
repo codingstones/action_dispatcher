@@ -1,4 +1,7 @@
 require "bundler/setup"
+require 'simplecov'
+SimpleCov.start
+
 require "action_dispatcher"
 
 RSpec.configure do |config|
