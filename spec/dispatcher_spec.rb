@@ -23,6 +23,15 @@ describe ActionDispatcher::Dispatcher do
     end
   end
 
+  context "when action has different number of parameters" do
+    it "raises an error" do
+      @dispatcher.add_action(action_name, AdderAction.new)
+
+      expect { @dispatcher.execute(action_name, [1 ,2, 3]) }.to \
+        raise_error(ActionDispatcher::ArgumentError)
+    end
+  end
+
   context "when action is not found" do
     it "raises an error" do
       expect { @dispatcher.execute(:non_existent, []) }.to \
