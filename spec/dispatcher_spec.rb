@@ -33,6 +33,16 @@ describe ActionDispatcher::Dispatcher do
     end
   end
 
+  context "when action has keyword parameters" do
+    it "executes action with parameters" do
+      @dispatcher.add_action(action_name, AdderActionWithKeywordParameters.new)
+
+      result = @dispatcher.execute(action_name, { operand1: 1, operand2: 2 })
+
+      expect(result).to eq(3)
+    end
+  end
+
   context "when action is not found" do
     it "raises an error" do
       expect { @dispatcher.execute(:non_existent, []) }.to \
@@ -55,6 +65,12 @@ end
 class AdderAction
   def execute(params)
     params[:operand1] + params[:operand2]
+  end
+end
+
+class AdderActionWithKeywordParameters
+  def execute(operand1:, operand2:)
+    operand1 + operand2
   end
 end
 
