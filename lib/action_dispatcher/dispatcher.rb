@@ -9,6 +9,10 @@ module ActionDispatcher
       @actions[action_name] = action
     end
 
+    def include?(action_name)
+      @actions.include?(action_name)
+    end
+
     def execute(action_name, parameters=nil)
       action = @actions[action_name]
 
