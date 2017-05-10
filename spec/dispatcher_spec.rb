@@ -8,19 +8,9 @@ describe ActionDispatcher::Dispatcher do
   it "executes chosen action with its parameters" do
     @dispatcher.add_action(action_name, AdderAction.new)
 
-    result = @dispatcher.execute(action_name, [1, 2])
+    result = @dispatcher.execute(action_name, { operand1: 1, operand2: 2 })
 
     expect(result).to eq(3)
-  end
-
-  context "when action is called with named parameters" do
-    it "executes chosen action with its parameters" do
-      @dispatcher.add_action(action_name, AdderAction.new)
-
-      result = @dispatcher.execute(action_name, { operand1: 1, operand2: 2 })
-
-      expect(result).to eq(3)
-    end
   end
 
   context "when action does not have any parameters" do
@@ -34,11 +24,12 @@ describe ActionDispatcher::Dispatcher do
   end
 
   context "when action has different number of parameters" do
-    it "raises an error" do
+    it "executes action with parameters" do
       @dispatcher.add_action(action_name, AdderAction.new)
 
-      expect { @dispatcher.execute(action_name, [1 ,2, 3]) }.to \
-        raise_error(ActionDispatcher::ArgumentError)
+      result = @dispatcher.execute(action_name, { operand1: 1 , operand2: 2, operand3: 3})
+
+      expect(result).to eq(3)
     end
   end
 
@@ -62,8 +53,8 @@ describe ActionDispatcher::Dispatcher do
 end
 
 class AdderAction
-  def execute(operand1, operand2)
-    operand1 + operand2
+  def execute(params)
+    params[:operand1] + params[:operand2]
   end
 end
 
