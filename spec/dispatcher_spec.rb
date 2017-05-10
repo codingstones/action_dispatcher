@@ -5,6 +5,17 @@ describe ActionDispatcher::Dispatcher do
     @dispatcher = ActionDispatcher::Dispatcher.new
   end
 
+  context "when validating actions" do
+    it "executes validate method" do
+      @dispatcher.add_action(action_name, ReturnParamsObjectAction.new)
+
+      params = @dispatcher.execute(action_name, { perand1: 1, operand2: 2 })
+
+      expect(params).to have_errors
+      expect(params.errors[0]).to eq("operand1 is not present")
+    end
+  end
+
   context "when executing actions" do
     it "executes chosen action with its parameters" do
       @dispatcher.add_action(action_name, AdderAction.new)
@@ -72,6 +83,16 @@ end
 class AdderAction
   def execute(params)
     params[:operand1] + params[:operand2]
+  end
+end
+
+class ReturnParamsObjectAction
+  def validate(params)
+    params.add_error("operand1 is not present") unless params.include?(:operand1)
+  end
+
+  def execute(params)
+    params
   end
 end
 

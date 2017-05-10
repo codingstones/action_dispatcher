@@ -21,8 +21,18 @@ module ActionDispatcher
       if parameters.nil?
         action.execute
       else
-        action.execute(parameters)
+        validate_and_execute(action, parameters)
       end
+    end
+
+    private
+
+    def validate_and_execute(action, parameters)
+      params = Params[parameters]
+
+      action.validate(params) if action.respond_to?(:validate)
+
+      action.execute(params)
     end
   end
 end
