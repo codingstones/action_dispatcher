@@ -9,10 +9,10 @@ describe ActionDispatcher::Dispatcher do
     it "executes validate method" do
       @dispatcher.add_action(action_name, ReturnParamsObjectAction.new)
 
-      params = @dispatcher.execute(action_name, { perand1: 1, operand2: 2 })
+      params = @dispatcher.execute(action_name, { operand_not_nil: nil, operand2: 2 })
 
-      expect(params).to have_errors
-      expect(params.errors[0]).to eq("operand1 is not present")
+      expect(params.notification).to have_errors
+      expect(params.notification.errors[0]).to eq("operand_not_nil is nil")
     end
   end
 
@@ -88,7 +88,7 @@ end
 
 class ReturnParamsObjectAction
   def validate(params)
-    params.add_error("operand1 is not present") unless params.include?(:operand1)
+    params.notification << "operand_not_nil is nil" if params[:operand_not_nil].nil?
   end
 
   def execute(params)
