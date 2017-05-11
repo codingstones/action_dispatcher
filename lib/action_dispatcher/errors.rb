@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ActionDispatcher
   class ActionNotFoundError < StandardError
   end
