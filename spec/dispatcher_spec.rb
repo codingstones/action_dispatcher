@@ -21,6 +21,16 @@ describe ActionDispatcher::Dispatcher do
 
       expect(result).to eq(ActionWithoutParameters::RESULT)
     end
+
+    context "and action dispatcher receives parameters" do
+      it "executes the action without any parameters" do
+        @dispatcher.add_action(:without_parameters, ActionWithoutParameters.new)
+
+        result = @dispatcher.execute(:without_parameters, { operand1: 1 })
+
+        expect(result).to eq(ActionWithoutParameters::RESULT)
+      end
+    end
   end
 
   context "when action has different number of parameters" do
@@ -30,6 +40,14 @@ describe ActionDispatcher::Dispatcher do
       result = @dispatcher.execute(action_name, { operand1: 1 , operand2: 2, operand3: 3})
 
       expect(result).to eq(3)
+    end
+
+    context "and dispatch does not pass parameters" do
+      it "raises an error" do
+        @dispatcher.add_action(action_name, AdderAction.new)
+
+        expect{ @dispatcher.execute(action_name) }.to raise_error(ArgumentError)
+      end
     end
   end
 

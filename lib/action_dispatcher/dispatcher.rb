@@ -18,11 +18,16 @@ module ActionDispatcher
 
       raise ActionNotFoundError if action.nil?
 
-      if parameters.nil?
+      if has_not_parameters?(action)
         action.execute
       else
+        raise ArgumentError if parameters.nil?
         action.execute(parameters)
       end
+    end
+
+    def has_not_parameters?(action)
+      action.public_method(:execute).parameters.length == 0
     end
   end
 end
