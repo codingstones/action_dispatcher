@@ -27,7 +27,7 @@ module ActionDispatcher
     end
 
     def has_not_parameters?(action)
-      action.public_method(:execute).parameters.length == 0
+      action.public_method(:execute).parameters.empty?
     end
   end
 end
