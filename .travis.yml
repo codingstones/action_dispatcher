@@ -3,5 +3,4 @@ language: ruby
 rvm:
   - 2.4.1
   - jruby-9.1.8.0
-  - rubinius-3.75
 before_install: gem install bundler -v 1.14.6
