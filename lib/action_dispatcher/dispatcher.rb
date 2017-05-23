@@ -28,6 +28,8 @@ module ActionDispatcher
       end
     end
 
+    private
+
     def not_parameters?(action)
       action.public_method(:execute).parameters.empty?
     end
